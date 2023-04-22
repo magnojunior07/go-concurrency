@@ -65,6 +65,7 @@ When a processor does not have any Goroutines, it applies the following rules in
 - pull work from the global queue
 
 Since a processor can pull work from the global queue when it runs out of tasks, the first available P will run the goroutine. This behavior explains why a goroutine runs on different P and shows how Go optimizes the system by letting other goroutines run when a resource is free.
+
 ![](https://miro.medium.com/v2/resize:fit:720/format:webp/1*6mvXwiCMLWi6pzAL34DkUg.jpeg)
 
 In this diagram, you can see that P1 ran out of goroutines. So the Go's runtime scheduler will take goroutines from other processors. If every other processor run queue is empty, it checks for completed IO requests (syscalls, network requests) from the netpoller. If this netpoller is empty, the processor will try to get goroutines from the global run queue.
