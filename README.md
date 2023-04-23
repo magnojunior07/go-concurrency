@@ -38,7 +38,7 @@ runnable goroutines. If the list is empty, the processor chooses a random proces
 Goroutines are functions that run concurrently with other functions. Goroutines can be considered lightweigth threads on top of an OS thread. The cost of creating a Gorotuine is tiny when compared to a thread. Hence it's common for Go applications to have thousands
 of Goroutines running concurrently.
 
-Goroutines are multiplexed to fewer number of OS threads. There might be only one trhead in a program with thousands of goroutines. If any Goroutine in that thread blocks says waiting for user input, then another OS thread is created, or a parked (idled) thread is pulled, and the remaining Goroutines are moved to the created or unparked OS thread.
+Goroutines are multiplexed to fewer number of OS threads. There might be only one thread in a program with thousands of goroutines. If any Goroutine in that thread blocks says waiting for user input, then another OS thread is created, or a parked (idled) thread is pulled, and the remaining Goroutines are moved to the created or unparked OS thread.
 All these are taken care of by Go's runtime scheduler. A goroutine has three states: running, runnable, and not runnable.
 
 ## Goroutines vs. Threads
