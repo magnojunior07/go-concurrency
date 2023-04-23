@@ -31,17 +31,17 @@ the number processors is set on the number of your CPU cores.
 - **M** = OS Thread
 - **P** = Processor
 
-Whe a new goroutine is created, or an existing goroutine becomes runnable, it is pushed into a list of runnable goroutines of the current processor. When the processor finishes executing a goroutine, it first tries to pop a goroutine from its list of
+When a new goroutine is created, or an existing goroutine becomes runnable, it is pushed into a list of runnable goroutines of the current processor. When the processor finishes executing a goroutine, it first tries to pop a goroutine from its list of
 runnable goroutines. If the list is empty, the processor chooses a random processor and tries to steal half of the runnable goroutines.
 
 ## What's a Goroutine?
 Goroutines are functions that run concurrently with other functions. Goroutines can be considered lightweigth threads on top of an OS thread. The cost of creating a Gorotuine is tiny when compared to a thread. Hence it's common for Go applications to have thousands
 of Goroutines running concurrently.
 
-Goroutines are multiplexed to fewer number number of OS threads. There might be only one trhead in a program with thousands of goroutines. If any Goroutine in that thread blocks says waiting for user input, then another OS thread is created, or a parked (idled) thread is pulled, and the remaining Goroutines are moved to the created or unparked OS thread.
+Goroutines are multiplexed to fewer number of OS threads. There might be only one trhead in a program with thousands of goroutines. If any Goroutine in that thread blocks says waiting for user input, then another OS thread is created, or a parked (idled) thread is pulled, and the remaining Goroutines are moved to the created or unparked OS thread.
 All these are taken care of by Go's runtime scheduler. A goroutine has three states: running, runnable, and not runnable.
 
-## Goroutines vs. Trheads
+## Goroutines vs. Threads
 Why not use simple OS threads as Go thread already does? That's a fair question. As mentioned above, Goroutines are already running on top of OS threads. But the difference is that multiple Goroutines run on single OS threads.
 
 Creating a goroutine does not require much memory, only 2kb of stack space. They grow by allocating and freeing heap storage as required. In comparison, threads start at a much larger space, along with a region of memory called a guard page that acts as a guard between one thread's memory and another.
